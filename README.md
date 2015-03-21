@@ -50,9 +50,6 @@ Template.page.helpers({
 
 This example would render: **"Posted 3 days ago, 1,000 comments"** to the `html` variable. The `post.meta` message is written in the industry standard [ICU Message syntax][], which you can also learn about on the [FormatJS website][FormatJS].
 
-### Languages
-Because their is no way to customize the package for your application, every languages are included. If you feel like you know a good way to fix that, you are more than welcomed to do a pull request.
-
 Contribute
 ----------
 
