@@ -48,7 +48,7 @@ Template.page.helpers({
 });
 ```
 
-This example would render: **"Posted 3 days ago, 1,000 comments"** to the `html` variable. The `post.meta` message is written in the industry standard [ICU Message syntax][], which you can also learn about on the [FormatJS website][FormatJS].
+This example would render: **"You have no comment $1,000.00"** to the `html` variable. The `post.meta` message is written in the industry standard [ICU Message syntax][], which you can also learn about on the [FormatJS website][FormatJS].
 
 Contribute
 ----------
