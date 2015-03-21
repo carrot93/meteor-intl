@@ -17,7 +17,7 @@
     "i18n"
   ],
   "author": "exon <trembl.ben@gmail.com> (https://benoitt.com/)",
-  "license": "ISC",
+  "license": "BSD",
   "bugs": {
     "url": "https://github.com/eXon/meteor-intl/issues"
   },
