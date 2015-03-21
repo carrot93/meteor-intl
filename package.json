@@ -16,7 +16,7 @@
     "internationalization",
     "i18n"
   ],
-  "author": "exon <trembl.ben@gmail.com> (https://benoitt.com/)",
+  "author": "Benoit Tremblay <trembl.ben@gmail.com> (https://benoitt.com/)",
   "license": "BSD",
   "bugs": {
     "url": "https://github.com/eXon/meteor-intl/issues"
