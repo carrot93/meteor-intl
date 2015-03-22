@@ -47,8 +47,7 @@ function registerWith(Template) {
   }
 
   function intlGet(path) {
-    var data = getData();
-    var intlData  = data && data.intl,
+    var intlData  = getIntlData(),
       pathParts = path.split('.');
 
     var obj, len, i;
@@ -77,8 +76,8 @@ function registerWith(Template) {
       format  = null;
     }
 
-    var data = getData();
-    var locales       = data && data.intl.locales;
+    var intlData = getIntlData();
+    var locales       = intlData.locales;
     var formatOptions = getFormatOptions('date', format, options);
 
     return getDateTimeFormat(locales, formatOptions).format(date);
@@ -93,8 +92,8 @@ function registerWith(Template) {
       format  = null;
     }
 
-    var data = getData();
-    var locales       = data && data.intl.locales;
+    var intlData = getIntlData();
+    var locales       = intlData.locales;
     var formatOptions = getFormatOptions('time', format, options);
 
     return getDateTimeFormat(locales, formatOptions).format(date);
@@ -109,8 +108,8 @@ function registerWith(Template) {
       format  = null;
     }
 
-    var data = getData();
-    var locales       = data && data.intl.locales;
+    var intlData = getIntlData();
+    var locales       = intlData.locales;
     var formatOptions = getFormatOptions('relative', format, options);
     var now           = options.hash.now;
 
@@ -131,8 +130,8 @@ function registerWith(Template) {
       format  = null;
     }
 
-    var data = getData();
-    var locales       = data && data.intl.locales;
+    var intlData = getIntlData();
+    var locales       = intlData.locales;
     var formatOptions = getFormatOptions('number', format, options);
 
     return getNumberFormat(locales, formatOptions).format(num);
@@ -155,8 +154,7 @@ function registerWith(Template) {
       );
     }
 
-    var data = getData();
-    var intlData = data || {},
+    var intlData = getIntlData(),
       locales  = intlData.locales,
       formats  = intlData.formats;
 
@@ -207,7 +205,9 @@ function registerWith(Template) {
 
   // -- Utilities ------------------------------------------------------------
 
-  function getData() {
+  function getIntlData() {
+    var intlData = {};
+
     var data;
     var i = 0;
 
@@ -215,11 +215,11 @@ function registerWith(Template) {
       data = Template.parentData(i++);
 
       if (data && data.intl) {
-        return data;
+        intlData = extend(data.intl, intlData);
       }
     } while(data);
 
-    return null;
+    return intlData;
   }
 
   function assertIsDate(date, errMsg) {

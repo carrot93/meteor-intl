@@ -2388,7 +2388,6 @@
 
     function $$helpers$$registerWith(Template) {
       var helpers = {
-        intl             : intl,
         intlGet          : intlGet,
         formatDate       : formatDate,
         formatTime       : formatTime,
@@ -2404,17 +2403,8 @@
         }
       }
 
-      function intl(options, a, b, c) {
-        console.log(options, a, b, c);
-        var data     = getData();
-          intlData = $$utils$$extend({}, data.intl, options.hash);
-
-        Template.currentData().intl = intlData;
-      }
-
       function intlGet(path) {
-        var data = getData();
-        var intlData  = data && data.intl,
+        var intlData  = getIntlData(),
           pathParts = path.split('.');
 
         var obj, len, i;
@@ -2443,8 +2433,8 @@
           format  = null;
         }
 
-        var data = getData();
-        var locales       = data && data.intl.locales;
+        var intlData = getIntlData();
+        var locales       = intlData.locales;
         var formatOptions = getFormatOptions('date', format, options);
 
         return $$helpers$$getDateTimeFormat(locales, formatOptions).format(date);
@@ -2459,8 +2449,8 @@
           format  = null;
         }
 
-        var data = getData();
-        var locales       = data && data.intl.locales;
+        var intlData = getIntlData();
+        var locales       = intlData.locales;
         var formatOptions = getFormatOptions('time', format, options);
 
         return $$helpers$$getDateTimeFormat(locales, formatOptions).format(date);
@@ -2475,8 +2465,8 @@
           format  = null;
         }
 
-        var data = getData();
-        var locales       = data && data.intl.locales;
+        var intlData = getIntlData();
+        var locales       = intlData.locales;
         var formatOptions = getFormatOptions('relative', format, options);
         var now           = options.hash.now;
 
@@ -2497,8 +2487,8 @@
           format  = null;
         }
 
-        var data = getData();
-        var locales       = data && data.intl.locales;
+        var intlData = getIntlData();
+        var locales       = intlData.locales;
         var formatOptions = getFormatOptions('number', format, options);
 
         return $$helpers$$getNumberFormat(locales, formatOptions).format(num);
@@ -2521,8 +2511,7 @@
           );
         }
 
-        var data = getData();
-        var intlData = data || {},
+        var intlData = getIntlData(),
           locales  = intlData.locales,
           formats  = intlData.formats;
 
@@ -2573,7 +2562,9 @@
 
       // -- Utilities ------------------------------------------------------------
 
-      function getData() {
+      function getIntlData() {
+        var intlData = {};
+
         var data;
         var i = 0;
 
@@ -2581,11 +2572,11 @@
           data = Template.parentData(i++);
 
           if (data && data.intl) {
-            return data;
+            intlData = $$utils$$extend(data.intl, intlData);
           }
         } while(data);
 
-        return null;
+        return intlData;
       }
 
       function assertIsDate(date, errMsg) {
