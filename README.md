@@ -24,27 +24,23 @@ There are many examples [on the website][FormatJS], but here's a comprehensive o
 
 ```handlebars
 <template name="page">
-  {{#with intl}}
-    {{formatMessage intlName='messages.post.meta' num=0}}
-    {{formatNumber 1000 style="currency" currency="USD"}}
-  {{/with}}
+  {{formatMessage intlName='messages.post.meta' num=0}}
+  {{formatNumber 1000 style="currency" currency="USD"}}
 </template>
 ```
 
 ```js
-Template.page.helpers({
-  intl: function() {
-    return {
-      intl: {
-        locales: ['en-US'],
-        messages: {
-          post: {
-            meta: 'You have {num, plural, =0{no comment} one{# comment} other{# comments}}'
-          }
-        }
-      }
-    }
+Template.layout.onCreated(function() {
+  this.data.intl = {
+    locales: ['en-US'],
+    messages: {}
   }
+});
+
+Template.page.onCreated(function() {
+  this.data.intl.messages.post = {
+    meta: 'You have {num, plural, =0{no comment} one{# comment} other{# comments}}'
+  };
 });
 ```
 
