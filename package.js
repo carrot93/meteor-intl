@@ -1,6 +1,6 @@
 Package.describe({
   name: 'benoitt:intl',
-  version: '0.9.2',
+  version: '0.9.3',
   summary: 'Meteor helpers for internationalization',
   git: 'https://github.com/eXon/meteor-intl.git',
   documentation: 'README.md'

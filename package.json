@@ -1,6 +1,6 @@
 {
   "name": "meteor-intl",
-  "version": "0.9.2",
+  "version": "0.9.3",
   "description": "Meteor helpers for internationalization",
   "main": "dist/meteor-intl.js",
   "scripts": {
